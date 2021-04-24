@@ -16,24 +16,23 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  *
  */
 #pragma once
 
 #ifdef __cplusplus
-extern "C" { /* C-declarations for C++ */
+  extern "C" { /* C-declarations for C++ */
 #endif
 
-extern void lv_draw_extrusion(void);
-extern void lv_clear_extrusion();
-extern void disp_ext_type();
-extern void disp_ext_step();
-extern void disp_ext_speed();
-extern void disp_hotend_temp();
-extern void disp_extru_amount();
+void lv_draw_extrusion();
+void lv_clear_extrusion();
+void disp_ext_type();
+void disp_ext_step();
+void disp_ext_speed();
+void disp_hotend_temp();
+void disp_extru_amount();
 
-//extern void disp_temp_ready_print();
 #ifdef __cplusplus
-} /* C-declarations for C++ */
+  } /* C-declarations for C++ */
 #endif
