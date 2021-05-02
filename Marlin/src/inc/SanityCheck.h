@@ -2215,8 +2215,11 @@ static_assert(hbm[Z_AXIS] >= 0, "HOMING_BUMP_MM.Z must be greater than or equal 
 #endif
 
 /**
- * Software Reset on Kill option
+ * Software Reset options
  */
+#if ENABLED(SOFT_RESET_VIA_SERIAL) && DISABLED(EMERGENCY_PARSER)
+  #error "EMERGENCY_PARSER is required to activate SOFT_RESET_VIA_SERIAL."
+#endif
 #if ENABLED(SOFT_RESET_ON_KILL) && !BUTTON_EXISTS(ENC)
   #error "An encoder button is required or SOFT_RESET_ON_KILL will reset the printer without notice!"
 #endif
@@ -3034,8 +3037,10 @@ static_assert(   _ARR_TEST(3,0) && _ARR_TEST(3,1) && _ARR_TEST(3,2)
                   "BACKLASH_COMPENSATION can only apply to " STRINGIFY(NORMAL_AXIS) " on a MarkForged system.");
   #elif IS_CORE
     constexpr float backlash_arr[] = BACKLASH_DISTANCE_MM;
-    static_assert(!backlash_arr[CORE_AXIS_1] && !backlash_arr[CORE_AXIS_2],
+    #ifndef CORE_BACKLASH
+      static_assert(!backlash_arr[CORE_AXIS_1] && !backlash_arr[CORE_AXIS_2],
                   "BACKLASH_COMPENSATION can only apply to " STRINGIFY(NORMAL_AXIS) " with your CORE system.");
+    #endif
   #endif
 #endif
 
